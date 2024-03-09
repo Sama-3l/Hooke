@@ -1,3 +1,4 @@
 venv
 poppler-24.02.0
-tesseract-5.3.4
+
+/Api/__pycache__
