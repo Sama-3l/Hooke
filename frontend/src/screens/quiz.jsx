@@ -1,37 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import marsImage from '../assets/mars.png';
-import parisImage from '../assets/paris.png';
+import q2 from '../assets/q2.jpg';
+import q1 from '../assets/q1.jpg';
+import q3 from '../assets/q3.jpg';
+import q4 from '../assets/q4.jpg';
+import q5 from '../assets/q5.jpg';
 
 const quizData = [
   {
     id: 1,
-    question: 'What is the capital of France?',
-    image: parisImage,
-    options: ['Berlin', 'Madrid', 'Paris', 'Rome'],
+    question: q1
   },
   {
     id: 2,
-    question: 'Which planet is known as the Red Planet?',
-    image: marsImage,
-    options: ['Earth', 'Mars', 'Venus', 'Jupiter'],
+    question: q2
   },
   {
     id: 3,
-    question: 'Which planet is known as the Red Planet?',
-    image: marsImage,
-    options: ['Earth', 'Mars', 'Venus', 'Jupiter'],
+    question: q3
   },
   {
     id: 4,
-    question: 'Which planet is known as the Red Planet?',
-    image: marsImage,
-    options: ['Earth', 'Mars', 'Venus', 'Jupiter'],
+    question: q4
   },
   {
     id: 5,
-    question: 'Which planet is known as the Red Planet?',
-    image: marsImage,
-    options: ['Earth', 'Mars', 'Venus', 'Jupiter'],
+    question: q5
   },
   // Add more questions as needed
 ];
@@ -62,8 +55,8 @@ const QuizApp = () => {
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
   };
 
-  const handleOptionChange = (optionIndex) => {
-    setSelectedOption(optionIndex);
+  const handleOptionChange = (option) => {
+    setSelectedOption(option);
   };
 
   const handleSave = () => {
@@ -113,28 +106,51 @@ const QuizApp = () => {
           Timer: {formatTime(timer)}
         </div>
       )}
-      <h2>Quiz App</h2>
       {!quizFinished ? (
         <>
           <div>
-            <h3>{quizData[currentQuestion].question}</h3>
             <img
-              src={quizData[currentQuestion].image}
+              src={quizData[currentQuestion].question}
               alt={`Question ${currentQuestion + 1}`}
-              style={{ width: '200px', height: 'auto' }}
+              style={{height: '100px', width: '700px'}}
             />
-            {quizData[currentQuestion].options.map((option, index) => (
-              <div key={index} style={{ textAlign: 'center' }}>
-                <input
-                  type="radio"
-                  id={`option${index}`}
-                  name="options"
-                  checked={selectedOption === index}
-                  onChange={() => handleOptionChange(index)}
-                />
-                <label htmlFor={`option${index}`}>{option}</label>
-              </div>
-            ))}
+            <div style={{ textAlign: 'center' }}>
+              <input
+                type="radio"
+                id="optionA"
+                name="options"
+                checked={selectedOption === 'A'}
+                onChange={() => handleOptionChange('A')}
+              />
+              <label htmlFor="optionA">A</label>
+
+              <input
+                type="radio"
+                id="optionB"
+                name="options"
+                checked={selectedOption === 'B'}
+                onChange={() => handleOptionChange('B')}
+              />
+              <label htmlFor="optionB">B</label>
+
+              <input
+                type="radio"
+                id="optionC"
+                name="options"
+                checked={selectedOption === 'C'}
+                onChange={() => handleOptionChange('C')}
+              />
+              <label htmlFor="optionC">C</label>
+
+              <input
+                type="radio"
+                id="optionD"
+                name="options"
+                checked={selectedOption === 'D'}
+                onChange={() => handleOptionChange('D')}
+              />
+              <label htmlFor="optionD">D</label>
+            </div>
           </div>
           <div style={{ marginTop: '10px' }}>
             <button onClick={handlePrevious} disabled={currentQuestion === 0}>

@@ -9,6 +9,6 @@ import HomePage from './screens/home.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <HomePage />
+    <QuizApp />
   </React.StrictMode>,
 )
