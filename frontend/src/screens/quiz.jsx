@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import marsImage from '../assets/mars.avif';
 import parisImage from '../assets/paris.jpg';
 
@@ -39,6 +39,28 @@ const quizData = [
 const QuizApp = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [timer, setTimer] = useState(330); // 300 seconds = 5 minutes
+  const [quizFinished, setQuizFinished] = useState(false);
+
+  useEffect(() => {
+    const countdown = setInterval(() => {
+      setTimer((prevTimer) => Math.max(prevTimer - 1, 0));
+    }, 1000);
+
+    return () => clearInterval(countdown);
+  }, []);
+
+  useEffect(() => {
+    if (timer === 0) {
+      handleFinish();
+    }
+  }, [timer]);
+
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+  };
 
   const handleOptionChange = (optionIndex) => {
     setSelectedOption(optionIndex);
@@ -70,16 +92,37 @@ const QuizApp = () => {
     setSelectedOption(null);
   };
 
+  const handleFinish = () => {
+    // Implement finish logic (e.g., show results or submit answers)
+    console.log('Quiz finished!');
+    setQuizFinished(true);
+  };
+
   return (
     <div>
+      {!quizFinished && (
+        <div
+          style={{
+            float: 'right',
+            position: 'fixed',
+            top: '8px',
+            right: '20px',
+            color: timer <= 300 && timer > 0 ? 'red' : 'white',
+          }}
+        >
+          Timer: {formatTime(timer)}
+        </div>
+      )}
       <h2>Quiz App</h2>
-      {currentQuestion < quizData.length ? (
+      {!quizFinished ? (
         <>
           <div>
             <h3>{quizData[currentQuestion].question}</h3>
-            <img src={quizData[currentQuestion].image} 
-                 alt={`Question ${currentQuestion + 1}`}
-                 style={{ width: '200px', height: 'auto' }} />
+            <img
+              src={quizData[currentQuestion].image}
+              alt={`Question ${currentQuestion + 1}`}
+              style={{ width: '200px', height: 'auto' }}
+            />
             {quizData[currentQuestion].options.map((option, index) => (
               <div key={index}>
                 <input
@@ -122,6 +165,11 @@ const QuizApp = () => {
                 {index + 1}
               </span>
             ))}
+          </div>
+          <div>
+            <button onClick={handleFinish} style={{ marginTop: '20px' }}>
+              Finish
+            </button>
           </div>
         </>
       ) : (
