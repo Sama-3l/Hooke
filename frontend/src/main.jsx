@@ -8,6 +8,6 @@ import QuizApp from './screens/quiz.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <LoginForm />
+    <QuizApp />
   </React.StrictMode>,
 )

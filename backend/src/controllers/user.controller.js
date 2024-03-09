@@ -1,6 +1,6 @@
 import { asyncHandler } from "../utils/asyncHandler.js"
 import { ApiError } from '../utils/ApiError.js'
-import { User } from '../models/users.models.js'
+import { User } from '../models/user.models.js'
 // import { uploadOnCloudinary } from '../utils/cloudinary.js'
 import { ApiResponse } from "../utils/ApiResponse.js"
 import jwt  from "jsonwebtoken"
@@ -46,8 +46,6 @@ const registerUser = asyncHandler(async (req, res) => {
     // 6-7
     const newUser = await User.create({
         fullname,
-        avatar: avatar.url,
-        coverImage: coverImage?.url || "",
         email,
         username: username.toLowerCase(),
         password
@@ -204,6 +202,12 @@ const updateUser = asyncHandler(async (req, res) => {
         .json(new ApiResponse(200, user, "User Updated Successfully"))
 })
 
+const postPdf = asyncHandler(async (req, res) => {
+
+    const pdfPath = req.files?.[0]?.path;
+    console.log(pdfPath)
+})
+
 export {
     registerUser,
     loginUser,
@@ -212,4 +216,5 @@ export {
     getCurrentUser,
     changePassword,
     updateUser,
+    postPdf
 }

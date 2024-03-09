@@ -1,6 +1,7 @@
 import { Router } from "express";
-// import { upload } from '../middlewares/multer.middleware.js'
-// import { verifyJWT } from '../middlewares/auth.middleware.js'
+import { upload } from '../middlewares/multer.middleware.js'
+import { verifyJWT } from '../middlewares/auth.middleware.js'
+
 import { 
     registerUser,
     loginUser,
@@ -8,7 +9,9 @@ import {
     refreshAcessToken,
     getCurrentUser,
     changePassword,
-    updateUser } from "../controllers/user.controller.js";
+    updateUser,
+    postPdf  } from "../controllers/user.controller.js";
+
 
 
 const router = Router();
@@ -24,13 +27,13 @@ router.route('/refresh-token').post(refreshAcessToken)
 router.route('/change-password').post(verifyJWT,changePassword)
 router.route('/current-user').get(verifyJWT,getCurrentUser)
 router.route('/update-user').patch(verifyJWT,updateUser)
-router.route('/update-avatar').patch(
-    verifyJWT,
-    upload.single({ name: 'avatat'}), 
-    updateUserAvatar)
-router.route('/update-cover-Image').patch(
-        verifyJWT,
-        upload.single({name: 'coverImage',}), 
-        updateCoverImage)
+router.route('/postpdf').post(
+    upload.fields([
+    {
+        name:"pdf",
+        maxCount:1
+    },
+    ]),
+    postPdf)
 
 export default router;
