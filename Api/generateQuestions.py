@@ -1,15 +1,23 @@
 from flask import Flask, request, jsonify
+import os
 
 app = Flask(__name__)
 
 def process_pdf(pdf_url):
-    # PDF processing logic
+    import readingImage
+    
     # For now, let's just print the PDF URL and return a dummy response
+    image_dir_path = os.getcwd() + "\\public\\Question\\"
+    filesPath = []
+    for filename in os.listdir(image_dir_path):
+        image_path = os.path.join(image_dir_path, filename)
+        filesPath.append(image_path)
+    
     print("Processing PDF from URL:", pdf_url)
     response = {
         'success': True,
         'message': 'PDF processed successfully',
-        'images': []
+        'images': filesPath
     }
     return response
 
