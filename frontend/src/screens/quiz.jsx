@@ -1,34 +1,36 @@
 import React, { useState } from 'react';
+import marsImage from '../assets/mars.avif';
+import parisImage from '../assets/paris.jpg';
 
 const quizData = [
   {
     id: 1,
     question: 'What is the capital of France?',
-    image: import('../assets/paris.jpg').then((image) => image.default),
+    image: parisImage,
     options: ['Berlin', 'Madrid', 'Paris', 'Rome'],
   },
   {
     id: 2,
     question: 'Which planet is known as the Red Planet?',
-    image: import('../assets/mars.avif').then((image) => image.default),
+    image: marsImage,
     options: ['Earth', 'Mars', 'Venus', 'Jupiter'],
   },
   {
     id: 3,
     question: 'Which planet is known as the Red Planet?',
-    image: import('../assets/mars.avif').then((image) => image.default),
+    image: marsImage,
     options: ['Earth', 'Mars', 'Venus', 'Jupiter'],
   },
   {
     id: 4,
     question: 'Which planet is known as the Red Planet?',
-    image: import('../assets/mars.avif').then((image) => image.default),
+    image: marsImage,
     options: ['Earth', 'Mars', 'Venus', 'Jupiter'],
   },
   {
     id: 5,
     question: 'Which planet is known as the Red Planet?',
-    image: import('../assets/mars.avif').then((image) => image.default),
+    image: marsImage,
     options: ['Earth', 'Mars', 'Venus', 'Jupiter'],
   },
   // Add more questions as needed
@@ -75,7 +77,9 @@ const QuizApp = () => {
         <>
           <div>
             <h3>{quizData[currentQuestion].question}</h3>
-            <img src={quizData[currentQuestion].image} alt={`Question ${currentQuestion + 1}`} />
+            <img src={quizData[currentQuestion].image} 
+                 alt={`Question ${currentQuestion + 1}`}
+                 style={{ width: '200px', height: 'auto' }} />
             {quizData[currentQuestion].options.map((option, index) => (
               <div key={index}>
                 <input
