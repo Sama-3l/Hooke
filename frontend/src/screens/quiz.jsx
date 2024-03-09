@@ -39,7 +39,7 @@ const quizData = [
 const QuizApp = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [timer, setTimer] = useState(330); // 300 seconds = 5 minutes
+  const [timer, setTimer] = useState(300); // 300 seconds = 5 minutes
   const [quizFinished, setQuizFinished] = useState(false);
 
   useEffect(() => {
