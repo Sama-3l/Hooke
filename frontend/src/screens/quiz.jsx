@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import marsImage from '../assets/mars.avif';
-import parisImage from '../assets/paris.jpg';
+import marsImage from '../assets/mars.png';
+import parisImage from '../assets/paris.png';
 
 const quizData = [
   {
@@ -99,7 +99,7 @@ const QuizApp = () => {
   };
 
   return (
-    <div>
+    <div style={{ textAlign: 'center' }}>
       {!quizFinished && (
         <div
           style={{
@@ -124,7 +124,7 @@ const QuizApp = () => {
               style={{ width: '200px', height: 'auto' }}
             />
             {quizData[currentQuestion].options.map((option, index) => (
-              <div key={index}>
+              <div key={index} style={{ textAlign: 'center' }}>
                 <input
                   type="radio"
                   id={`option${index}`}
@@ -136,11 +136,13 @@ const QuizApp = () => {
               </div>
             ))}
           </div>
-          <div>
+          <div style={{ marginTop: '10px' }}>
             <button onClick={handlePrevious} disabled={currentQuestion === 0}>
               Previous
             </button>
+            <span style={{ margin: '0 8px' }} />
             <button onClick={handleSave}>Save</button>
+            <span style={{ margin: '0 8px' }} />
             <button onClick={handleNext}>Next</button>
           </div>
           <div>
