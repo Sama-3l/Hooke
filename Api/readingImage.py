@@ -1,20 +1,22 @@
-import easyocr
-from PIL import Image, ImageDraw
-import os
+from easyocr import Reader
+from PIL import Image
 import re
+import os
+
+import creatingImage
 
 def check_string_format(input_string):
     pattern = re.compile(r'^(Q|q)[.\s]?\d+[\).]?$')
     return bool(pattern.match(input_string))
 
 def findMinY(loc):
-    minY = 10000000000
+    minY = image.height
     for pos in loc:
         if pos[1] < minY:
             minY = pos[1]
     return minY
 
-reader = easyocr.Reader(['en'])
+reader = Reader(['en'])
 
 dest_path = os.getcwd() + "\\public\\Question"
 os.makedirs(dest_path, exist_ok=True)
@@ -34,13 +36,13 @@ for filename in os.listdir(image_dir_path):
     for result in results:
         loc, text, _ = result
         if check_string_format(text):
-            print(f"Text: {text}, {loc}")
             y_cordinates.append(findMinY(loc))
+    
     # print(results[-1][0])
     # print(findMinY(results[-1][0]))
     # y_cordinates.append(findMinY(results[-1][0]))
+    
     y_cordinates.append(image.height)
-    print(y_cordinates)
 
     for i in range(len(y_cordinates)-1):
         y_start = y_cordinates[i] - 10

@@ -1,6 +1,5 @@
 from pdf2image import convert_from_path
 import os
-from PIL import Image
 
 pdf_path = os.getcwd() + "\\backend\\src\\testPaper.pdf"
 poppler_path = os.getcwd() + "\\poppler-24.02.0\\Library\\bin"  
